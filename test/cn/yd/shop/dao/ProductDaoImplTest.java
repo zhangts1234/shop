@@ -40,6 +40,14 @@ public class ProductDaoImplTest {
 			System.out.println(temp);
 		}
 	}
+	
+	@Test
+	public void testQueryPage() {
+		ArrayList<Product> proList = daoImpl.queryByBame("电脑",2,3);
+		for(Product temp:proList){
+			System.out.println(temp);
+		}
+	}
 
 	@Test
 	public void testSave() {

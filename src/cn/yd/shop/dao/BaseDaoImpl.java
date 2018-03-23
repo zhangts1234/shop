@@ -39,7 +39,7 @@ public abstract class BaseDaoImpl<T> {
 		}
 	}
 
-	protected ArrayList<T> queryByBame(String sql, Object[] param) {
+	protected ArrayList<T> queryByBame(String sql, Object... param) {
 		ArrayList<T> tList = new ArrayList<T>();
 		// 1: 获取数据库连接对象
 		Connection conn = null;

@@ -27,7 +27,13 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> {
 	// 如果没有给集合指定类型,则默认就是object类型.可以指定泛型<Product>
 	public ArrayList<Product> queryByBame(String name) {
 		String sql = "select * from product where name like ?";
-		return super.queryByBame(sql, new Object[]{"%" + name + "%"});
+		return super.queryByBame(sql, "%" + name + "%");
+	}
+
+	public ArrayList<Product> queryByBame(String name, int page, int size) {
+		String sql = "select * from product where name like ? limit ?,?";
+		return super.queryByBame(sql, new Object[] { "%" + name + "%",
+				(page - 1) * size, size });
 	}
 
 	// 通过id获取指定的商品数据
@@ -52,8 +58,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> {
 
 	public void delete(int id) {
 		String sql = "delete from product where id = ?";
-		super.update(sql,id);
+		super.update(sql, id);
 	}
 
-	
 }
