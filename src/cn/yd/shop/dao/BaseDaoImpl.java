@@ -13,7 +13,9 @@ import cn.yd.shop.util.JdbcUtil;
 public abstract class BaseDaoImpl<T> {
 
 	// 定义一个抽象方法,此方法让子类去实现
-	protected abstract T getRow(ResultSet rs) throws SQLException;
+	protected abstract T 
+	getRow(ResultSet rs) 
+			throws SQLException;
 
 	public T getById(String sql, Object id) {
 		T t = null;
@@ -68,7 +70,7 @@ public abstract class BaseDaoImpl<T> {
 	}
 
 	// 抽取update insert delete , protected:只有子类可以访问
-	protected void update(String sql, Object[] param) {
+	protected void update(String sql, Object... param) {
 		// 1: 获取数据库连接对象
 		Connection conn = null;
 		// 2: 创建执行SQL语句prepareStatement对象

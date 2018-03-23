@@ -1,21 +1,18 @@
 package cn.yd.shop.dao;
 
 //ctrl + shift + o: 导入导出包
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import cn.yd.shop.model.Product;
-import cn.yd.shop.util.JdbcUtil;
 
 // 此类主要完成数据库的CRUD, 继承BaseDao则可以使用baseDao提供的方法
 public class ProductDaoImpl extends BaseDaoImpl<Product> {
 
 	@Override
-	protected Product getRow(ResultSet rs) throws SQLException {
+	protected Product getRow(ResultSet rs) 
+			throws SQLException {
 		Product product = new Product();
 		product.setId(rs.getInt("id"));
 		product.setName(rs.getString("name"));
@@ -56,7 +53,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> {
 
 	public void delete(int id) {
 		String sql = "delete from product where id = ?";
-		super.update(sql, new Object[] { new Integer(id) });
+		super.update(sql,id);
 	}
 
 	
