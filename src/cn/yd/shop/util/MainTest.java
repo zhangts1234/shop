@@ -1,37 +1,28 @@
 package cn.yd.shop.util;
 
+import java.sql.SQLException;
+import java.util.Date;
 
-// 测试代码：java的可变参数
+import cn.yd.shop.dao.BaseDaoImpl;
+import cn.yd.shop.dao.ProductDaoImpl;
+import cn.yd.shop.model.Product;
+
+
+// 测试代码：父类的引用,可以指向子类对象.
 public class MainTest {
 	
 	public static void main(String[] args) {
-		int result = MainTest.add(1,new int[]{1,2,3});
-		int result2 = MainTest.add(1,2,3);
-		System.out.println(result + "," + result2);
-	}
-	
-	public static int add(int x,int y){
-		return x+y;
-	}
-	
-	public static int add(int x,int y,int z){
-		return x+y+z;
-	}
-	
-	// jdk1.5时推出可变参数(可变参数就是数组)
-	public static int add(int y,int... num){
-		int sum = 0;
-		for(int x:num){
-			sum +=x;
+		// 父类的引用指向子类的对象
+		Object o = new Date();
+		System.out.println(o);
+		// 但是子类的引用不可以指向父类对象
+//		Date date = new Object();
+		BaseDaoImpl<Product> daoImpl = new ProductDaoImpl();
+		try {
+			daoImpl.getRow(null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return sum;
 	}
-	
-//	public static int add(int[] num){
-//		int sum = 0;
-//		for(int x:num){
-//			sum +=x;
-//		}
-//		return sum;
-//	}
 }

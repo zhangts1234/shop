@@ -13,9 +13,7 @@ import cn.yd.shop.util.JdbcUtil;
 public abstract class BaseDaoImpl<T> {
 
 	// 定义一个抽象方法,此方法让子类去实现
-	protected abstract T 
-	getRow(ResultSet rs) 
-			throws SQLException;
+	public abstract T getRow(ResultSet rs) throws SQLException;
 
 	public T getById(String sql, Object id) {
 		T t = null;

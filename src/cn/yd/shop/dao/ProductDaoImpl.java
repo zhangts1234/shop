@@ -11,8 +11,7 @@ import cn.yd.shop.model.Product;
 public class ProductDaoImpl extends BaseDaoImpl<Product> {
 
 	@Override
-	protected Product getRow(ResultSet rs) 
-			throws SQLException {
+	public Product getRow(ResultSet rs) throws SQLException {
 		Product product = new Product();
 		product.setId(rs.getInt("id"));
 		product.setName(rs.getString("name"));
