@@ -5,17 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-import cn.yd.shop.model.Product;
 import cn.yd.shop.util.JdbcUtil;
 
 // 所有dao的父类,主要用来抽取共性代码,拥有抽象方法的类是抽象类
-public abstract class BaseDaoImpl<T> {
+public class BaseDaoImpl<T> {
+	
+//	private JdbcTemplate jdbcTemplate;
 
 	// 定义一个抽象方法,此方法让子类去实现
-	public abstract T getRow(ResultSet rs) throws SQLException;
+//	public abstract T getRow(ResultSet rs) throws SQLException;
 
-	public T getById(String sql, Object id) {
+	public T getById(String sql, Object id,RowMapper<T> mapper) {
 		T t = null;
 		// 1: 获取数据库连接对象
 		Connection conn = null;
@@ -29,7 +32,7 @@ public abstract class BaseDaoImpl<T> {
 			rs = pre.executeQuery();// 用来存储查询返回的结果集
 			if (rs.next()) {
 				System.out.println(this);
-				t = this.getRow(rs);
+				t = mapper.mapRow(rs);
 			}
 			return t;
 		} catch (SQLException e) {
@@ -39,8 +42,8 @@ public abstract class BaseDaoImpl<T> {
 		}
 	}
 
-	protected ArrayList<T> queryByBame(String sql, Object... param) {
-		ArrayList<T> tList = new ArrayList<T>();
+	protected List<T> queryByBame(String sql,Object[] param,RowMapper<T> mapper) {
+		List<T> tList = new ArrayList<T>();
 		// 1: 获取数据库连接对象
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -57,7 +60,7 @@ public abstract class BaseDaoImpl<T> {
 			// 方法使第一行成为当前行；第二次调用使第二行成为当前行，依此类推
 			while (rs.next()) {
 				// 只有具体的子类才能知道结果集如何操作,此处父类实现不了
-				tList.add(this.getRow(rs));
+				tList.add(mapper.mapRow(rs));
 			}
 			return tList;
 		} catch (SQLException e) {

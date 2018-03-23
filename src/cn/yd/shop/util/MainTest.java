@@ -12,17 +12,18 @@ import cn.yd.shop.model.Product;
 public class MainTest {
 	
 	public static void main(String[] args) {
+		
 		// 父类的引用指向子类的对象
 		Object o = new Date();
 		System.out.println(o);
 		// 但是子类的引用不可以指向父类对象
 //		Date date = new Object();
-		BaseDaoImpl<Product> daoImpl = new ProductDaoImpl();
-		try {
-			daoImpl.getRow(null);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		BaseDaoImpl<Product> daoImpl = new ProductDaoImpl();
+//		try {
+////			daoImpl.getRow(null);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }
